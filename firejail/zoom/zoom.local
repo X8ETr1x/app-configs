@@ -1,0 +1,48 @@
+include /etc/firejail/disable-common.inc 
+include /etc/firejail/disable-passwdmgr.inc
+
+include /etc/firejail/disable-interpreters.inc
+include /etc/firejail/disable-xdg.inc
+include /etc/firejail/disable-exec.inc
+include /etc/firejail/disable-devel.inc
+
+apparmor
+
+read-only
+
+whitelist/zoom.back
+read-write/zoom.back
+
+whitelist/zoom.data
+read-write/zoom.data
+
+whitelist .zoom
+read-write .zoom
+
+whitelist .config/zoomus.conf
+read-write .config/zoomus.conf
+
+private-tmp
+private dev
+private cache
+private cwd
+private-etc group,hostname,passwd,profilem,bash.bashrc,fonts
+blacklist /mnt
+blacklist /data
+blacklist /media
+netfilter
+dns 8.8.8.8
+dns 8.8.4.4
+protocol inet,inet6,netlink,unix
+nodvd
+notv
+seccomp
+nonewprivs
+caps.drop all
+noroot
+needed by zoom: memory-deny-write-execute
+nogroups
+shell none
+dbus-user none
+dbus-system none
+nou2f
